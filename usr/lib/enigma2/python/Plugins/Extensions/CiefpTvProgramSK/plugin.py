@@ -24,15 +24,25 @@ EPG_URL = "https://epgshare01.online/epgshare01/epg_ripper_SK1.xml.gz"
 CACHE_TIME = 86400  # 24 hours caching
 
 # Configure logging
+import logging
+
+# Ukloni sve postojeće handlere za root logger i specifični logger
+logging.getLogger('').handlers = []
+logging.getLogger("CiefpTvProgramSK").handlers = []
+
+# Postavi konfiguraciju logovanja
 logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    level=logging.ERROR,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/tmp/ciefp_tvprogramsk.log'),
+        logging.FileHandler('/tmp/ciefp_epgshare.log', mode='a'),
         logging.StreamHandler()
-    ]
+    ],
+    force=True
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("CiefpTvProgramSK")
+logger.debug("Initializing CiefpTvProgramSK logger")
+
 
 def clean_channel_name(name):
     # Zadržava samo alfanumeričke karaktere i tačke, zatim pretvara u mala slova
@@ -40,7 +50,7 @@ def clean_channel_name(name):
 
 class CiefpTvProgramSK(Screen):
     skin = """
-        <screen name="CiefpTvProgramSK" position="center,center" size="1800,800" title="..:: CiefpTvProgramSK v1.0 ::..">
+        <screen name="CiefpTvProgramSK" position="center,center" size="1800,800" title="..:: CiefpTvProgramSK v1.1 ::..">
             <widget name="channelList" position="0,0" size="350,668" scrollbarMode="showAlways" itemHeight="33" font="Regular;28" />
             <widget name="epgInfo" position="370,0" size="1000,668" scrollbarMode="showAlways" itemHeight="33" font="Regular;28" />
             <widget name="sideBackground" position="1380,0" size="420,668" alphatest="on" />
@@ -389,7 +399,7 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
     return [PluginDescriptor(
         name="CiefpTvProgramSK",
-        description="EPG plugin,epgshare v1.0",
+        description="EPG plugin,epgshare v1.1",
         where=PluginDescriptor.WHERE_PLUGINMENU,
         icon="icon.png",
         fnc=main
