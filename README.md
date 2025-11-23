@@ -4,7 +4,7 @@
 - **Version: 1.1**
 - **Author: Ciefp**
 
-![Bouquet](https://github.com/ciefp/CiefpTvProgramSK/blob/main/ciefptvprogram.jpg)
+![Bouquet](https://github.com/ciefp/CiefpTvProgramSK/blob/main/ciefptvprogramsk.jpg)
 
 - **CiefpTvProgramSK is an Enigma2 plugin designed to display the Electronic Program Guide (EPG) for TV channels,**
 - **using data downloaded from https://epgshare01.online/epgshare01/epg_ripper_SK1.xml.gz.**
